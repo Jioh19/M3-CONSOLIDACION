@@ -69,6 +69,7 @@ h6 {
 }
 
 main {
+    font-size: clamp(0.5rem, 3.5vw, 1rem);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -104,6 +105,10 @@ main {
 	border-radius: var(--radio);
 	background: transparent;
 	font-weight: 300;
+}
+
+button {
+    font-size: clamp(0.5rem, 3.5vw, 1rem);
 }
 
 .tablas {
