@@ -87,10 +87,10 @@ function imprimirGasto() {
 	let nodo = document.querySelector("#listaGastos");
 	nodo.innerHTML = "";
 	for (let i in gastos) {
-		nodo.innerHTML += `<p id="itemGasto">${gastos[i].nombreGasto}</p>
+		nodo.innerHTML += `<div class="lineaGasto"><p id="itemGasto">${gastos[i].nombreGasto}</p>
         <p id="itemValor">$${gastos[i].montoGasto}</p>
         <img src="./assets/img/rubbish-bin-svgrepo-com.svg" class="savage"
-        id="savage-${i}" alt="" onclick="eliminarGasto()">`;
+        id="savage-${i}" alt="" onclick="eliminarGasto()"></div>`;
 	}
 }
 
@@ -99,7 +99,6 @@ function eliminarGasto() {
 	let index = event.target.id;
 	index = Number(index.slice(7));
 	proxyPresupuesto.debe -= gastos[index].montoGasto;
-	console.log("🚀 ~ eliminarGasto ~ gastos[index].monto:", gastos[index].montoGasto);
 	gastos.splice(index, 1);
 	imprimirGasto();
 	actualizarSaldo();

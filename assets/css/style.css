@@ -69,7 +69,7 @@ h6 {
 }
 
 main {
-    font-size: clamp(0.5rem, 3.5vw, 1rem);
+	font-size: clamp(0.5rem, 3.5vw, 1rem);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -108,11 +108,16 @@ main {
 }
 
 button {
-    font-size: clamp(0.5rem, 3.5vw, 1rem);
+	font-size: clamp(0.5rem, 3.5vw, 1rem);
 }
 
 .tablas {
+    margin-block: 6rem;
 	width: min(90%, 35rem);
+}
+
+.tabla {
+    margin-block: 4.25rem;
 }
 
 .saldos,
@@ -157,8 +162,7 @@ button {
 	margin-inline: auto;
 	height: 1rem;
 	width: 1rem;
-	fill: red;
-	stroke: red;
+	filter: invert(48%) sepia(199%) saturate(276%) hue-rotate(176deg) brightness(118%) contrast(119%);
 }
 
 .titulo {
@@ -167,9 +171,48 @@ button {
 }
 
 #listaGastos {
+	width: 100%;
+}
+
+.lineaGasto {
 	display: flex;
 	flex-wrap: wrap;
-    align-items:baseline;
-	flex: 0 1 auto;
 	width: 100%;
+	border-bottom: lightgray solid 1px;
+	align-items: baseline;
+	height: 1.55rem;
+}
+
+/* Botones con cosos... */
+.btn-outline-danger:hover {
+	box-shadow: 0 0 10px 0 rgb(var(--rojo)) inset, 0 0 20px 2px rgb(var(--rojo));
+}
+
+.btn:active {
+	animation: pulse 0.05s ;
+}
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	70% {
+		transform: scale(0.9);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.btn-outline-success:hover {
+	box-shadow: 0 0 10px 0 rgb(var(--verde)) inset, 0 0 20px 2px rgb(var(--verde));
+}
+
+/* Un media query para no perder la costumbre*/
+@media (max-width: 1104px) {
+    .tablas {
+        margin-block: 0;
+    }
+    .tabla {
+        margin-block: 0;
+    }
 }
