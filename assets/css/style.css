@@ -107,10 +107,6 @@ main {
 	font-weight: 300;
 }
 
-button {
-	font-size: clamp(0.5rem, 3.5vw, 1rem);
-}
-
 .tablas {
     margin-block: 6rem;
 	width: min(90%, 35rem);
@@ -183,6 +179,9 @@ button {
 	height: 1.55rem;
 }
 
+.btn {
+    font-size: clamp(0.5rem, 3.5vw, 1rem);
+}
 /* Botones con cosos... */
 .btn-outline-danger:hover {
 	box-shadow: 0 0 10px 0 rgb(var(--rojo)) inset, 0 0 20px 2px rgb(var(--rojo));
