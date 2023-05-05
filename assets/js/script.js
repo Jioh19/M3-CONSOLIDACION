@@ -1,4 +1,4 @@
-//*Un increíble objeto de 2 atributos. Mas que anda para usar Proxy
+//*Un increíble objeto de 2 atributos. Mas que nada para usar Proxy
 const presupuesto = {
 	haber: 0,
 	debe: 0,
@@ -34,7 +34,7 @@ const handlerGasto = {
 			return false;
 		}
 		if (args[1] <= 0 || typeof args[1] != "number") {
-			alert("Ingrese un monto válido");
+			alert("Ingrese un monto de gasto válido");
 			return false;
 		}
 		return new gasto(...args);
@@ -58,9 +58,16 @@ const agregarPresupuesto = () => {
 };
 
 // Pensaba hacer un chequeo de saldo negativo, pero me di cuenta que tiene mas sentido ver
-// un saldo negativo para ver cuanto falta para poder cubrir los gastos.
+// un saldo negativo para ver cuanto falta para poder cubrir los gastos. Pero para demostrar
+// que si se hacerlo, hare que el saldo quede de color rojo cuando saldo sea negativo.
 const actualizarSaldo = () => {
-	document.querySelector("#valorSaldos").innerHTML = `$${proxyPresupuesto.haber - proxyPresupuesto.debe}`;
+	const saldo = document.querySelector("#valorSaldos");
+	if (proxyPresupuesto.haber - proxyPresupuesto.debe < 0) {
+		saldo.classList.add("rojo");
+	} else {
+		saldo.classList.remove("rojo");
+	}
+	saldo.innerHTML = `$${proxyPresupuesto.haber - proxyPresupuesto.debe}`;
 	document.querySelector("#valorGastos").innerHTML = `$${proxyPresupuesto.debe}`;
 };
 
@@ -78,7 +85,7 @@ function agregarGasto() {
 			actualizarSaldo();
 		}
 	} catch (err) {
-		console.log(err);
+		console.error(err);
 	}
 }
 
@@ -94,7 +101,7 @@ function imprimirGasto() {
 	}
 }
 
-//Funcion que directamente elimina el gasto del arreglo gastos
+//Función que directamente elimina el gasto del arreglo gastos
 function eliminarGasto() {
 	let index = event.target.id;
 	index = Number(index.slice(7));
