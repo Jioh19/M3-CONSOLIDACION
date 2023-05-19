@@ -78,7 +78,7 @@ const actualizarSaldo = () => {
 // Agrego los gastos en un arreglo. Me imagino que para esta situación pedían arreglos/matrices
 // Ademas de un if y un try catch
 //! Agregue la matriz aca junto con algunas operaciones. Al final la use para usar el monto
-//! almacenado junto con hacer un console log de la línea de la matriz en gastosIndex.
+//! almacenado junto con hacer un console log de la matriz.
 function agregarGasto() {
 	let nombre = document.querySelector("#nombreGasto").value;
 	let monto = Number(document.querySelector("#montoGasto").value);
@@ -89,6 +89,7 @@ function agregarGasto() {
 			gastosMatriz[gastosIndex][0] = nombre;
 			gastosMatriz[gastosIndex][1] = monto;
 			
+			console.log(gastosMatriz);
 			console.log(gastosMatriz[gastosIndex][0], gastosMatriz[gastosIndex][1]);
 			gastos.push(gasto);
 			proxyPresupuesto.debe += gastosMatriz[gastosIndex][1];
@@ -106,7 +107,6 @@ function imprimirGasto() {
 	let nodo = document.querySelector("#listaGastos");
 	nodo.innerHTML = "";
 	for (let i in gastos) {
-		console.log(gastos);
 		nodo.innerHTML += `<div class="lineaGasto"><p id="itemGasto">${gastos[i].nombreGasto}</p>
         <p id="itemValor">$${gastos[i].montoGasto}</p>
         <img src="./assets/img/rubbish-bin-svgrepo-com.svg" class="savage"
