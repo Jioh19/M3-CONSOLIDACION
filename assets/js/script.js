@@ -48,12 +48,16 @@ const proxyPresupuesto = new Proxy(presupuesto, handlerPresupuesto);
 const proxyGasto = new Proxy(Gasto, handlerGasto);
 const gastos = [];
 
+//! Implemente una matriz de gastos solo para demostrar que si se utilizar matrices.
+const gastosMatriz = [];
+let gastosIndex = 0;
+
 // Usando a la fuerza las funciones flecha.... No hacen Hoist, por lo que en este caso
 // tienen 0 utilidad por sobre las funciones tradicionales. Personalmente las funciones
 // flecha no me parecen mas claras que la función tradicional (similarmente utilizada en otros lenguajes)
 const agregarPresupuesto = () => {
 	proxyPresupuesto.haber = Number(document.querySelector("#agregarPresupuesto").value);
-	document.querySelector("#valorPresupuestos").innerHTML = `$${proxyPresupuesto.haber}`;
+	document.querySelector("#valorPresupuestos").innerHTML = `${proxyPresupuesto.haber}`;
 	actualizarSaldo();
 };
 
@@ -67,22 +71,30 @@ const actualizarSaldo = () => {
 	} else {
 		saldo.classList.remove("rojo");
 	}
-	saldo.innerHTML = `$${proxyPresupuesto.haber - proxyPresupuesto.debe}`;
-	document.querySelector("#valorGastos").innerHTML = `$${proxyPresupuesto.debe}`;
+	saldo.innerHTML = `${proxyPresupuesto.haber - proxyPresupuesto.debe}`;
+	document.querySelector("#valorGastos").innerHTML = `${proxyPresupuesto.debe}`;
 };
 
 // Agrego los gastos en un arreglo. Me imagino que para esta situación pedían arreglos/matrices
 // Ademas de un if y un try catch
+//! Agregue la matriz aca junto con algunas operaciones. Al final la use para usar el monto
+//! almacenado junto con hacer un console log de la línea de la matriz en gastosIndex.
 function agregarGasto() {
 	let nombre = document.querySelector("#nombreGasto").value;
 	let monto = Number(document.querySelector("#montoGasto").value);
 	try {
 		let gasto = new proxyGasto(nombre, monto);
 		if (gasto) {
+			gastosMatriz[gastosIndex] = [];
+			gastosMatriz[gastosIndex][0] = nombre;
+			gastosMatriz[gastosIndex][1] = monto;
+			
+			console.log(gastosMatriz[gastosIndex][0], gastosMatriz[gastosIndex][1]);
 			gastos.push(gasto);
-			proxyPresupuesto.debe += monto;
+			proxyPresupuesto.debe += gastosMatriz[gastosIndex][1];
 			imprimirGasto();
 			actualizarSaldo();
+			gastosIndex++;
 		}
 	} catch (err) {
 		console.error(err);
@@ -94,6 +106,7 @@ function imprimirGasto() {
 	let nodo = document.querySelector("#listaGastos");
 	nodo.innerHTML = "";
 	for (let i in gastos) {
+		console.log(gastos);
 		nodo.innerHTML += `<div class="lineaGasto"><p id="itemGasto">${gastos[i].nombreGasto}</p>
         <p id="itemValor">$${gastos[i].montoGasto}</p>
         <img src="./assets/img/rubbish-bin-svgrepo-com.svg" class="savage"
